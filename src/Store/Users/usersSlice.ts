@@ -7,7 +7,8 @@ interface Users {
   industry: string;
   date_of_birth: string;
   salary: number;
-  years_of_experience: string;
+  email: string;
+  years_of_experience: number;
 }
 
 interface UsersState {
@@ -27,10 +28,28 @@ export const getUsers = createAsyncThunk("users/getUsers", async () => {
 const usersSlice = createSlice({
   name: "users",
   initialState,
-  reducers: {},
+  reducers: {
+    addUser(state) {
+      state.users.push({
+        id: 999,
+        first_name: "Bob",
+        last_name: "Builder",
+        email: "lsteaning0@usnews.com",
+        date_of_birth: "13/05/1978",
+        industry: "n/a",
+        salary: 98803.83,
+        years_of_experience: 6.6,
+      });
+      state.loading = false;
+    },
+    editUser(state, action) {},
+  },
   extraReducers: (builder) => {
     builder.addCase(getUsers.fulfilled, (state, action) => {
-      state.users.push(action.payload), (state.loading = false);
+      action.payload.map((val: any) => {
+        state.users.push(val);
+      }),
+        (state.loading = false);
     });
     builder.addCase(getUsers.pending, (state, action) => {
       state.loading = true;
@@ -40,5 +59,7 @@ const usersSlice = createSlice({
     });
   },
 });
+
+export const { addUser } = usersSlice.actions;
 
 export default usersSlice.reducer;

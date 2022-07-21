@@ -38,12 +38,11 @@ export const App = () => {
   ];
 
   return (
-    <div style={{ width: "100%", height: "50vh" }}>
+    <div style={{ width: "100%", height: "70vh", padding: "10px" }}>
       {/* Check data is loaded before rendering table */}
       {users.users.length > 0 && (
         <>
           <UsersTable users={users} />
-
           <Chart users={users.users} />
         </>
       )}

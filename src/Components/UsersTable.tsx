@@ -24,7 +24,7 @@ export const UsersTable = ({ users }: any) => {
 
   return (
     <DataGrid
-      rows={users.users}
+      rows={users?.users}
       columns={columns}
       experimentalFeatures={{ newEditingApi: true }}
       components={{ Toolbar: GridToolbar }}

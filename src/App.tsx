@@ -1,12 +1,8 @@
-import {
-  DataGrid,
-  GridCellEditCommitParams,
-  GridColumns,
-  GridToolbar,
-} from "@mui/x-data-grid";
+import { GridColumns } from "@mui/x-data-grid";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Chart from "./Components/Chart";
+import { UsersTable } from "./Components/UsersTable";
 import { AppDispatch, selectUsers } from "./Store/store";
 
 import { addUser, getUsers } from "./Store/Users/usersSlice";
@@ -16,19 +12,11 @@ export const App = () => {
   const users = useSelector(selectUsers);
 
   useEffect(() => {
+    // fetch data from API by dispatching the fetch action
     dispatch(getUsers());
   }, [dispatch]);
 
-  const handleClick = () => {
-    dispatch(addUser());
-    console.log(users);
-
-    // edit user
-  };
-
-  const handleEdit = (e: any) => {
-    console.log(e);
-  };
+  // Columns and header set for the table
   const columns: GridColumns = [
     {
       field: "first_name",
@@ -51,16 +39,10 @@ export const App = () => {
 
   return (
     <div style={{ width: "100%", height: "50vh" }}>
-      <button onClick={handleClick}>click</button>
+      {/* Check data is loaded before rendering table */}
       {users.users.length > 0 && (
         <>
-          <DataGrid
-            rows={users.users}
-            columns={columns}
-            experimentalFeatures={{ newEditingApi: true }}
-            onCellEditStop={handleEdit}
-            components={{ Toolbar: GridToolbar }}
-          />
+          <UsersTable users={users} />
 
           <Chart users={users.users} />
         </>

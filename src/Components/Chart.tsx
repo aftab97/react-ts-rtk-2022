@@ -6,20 +6,13 @@ import { YoeGraph } from "./YoeGraph";
 import { SalaryGraph } from "./SalaryGraph";
 
 const Chart = ({ users }: any) => {
-  const [ageData, setAgeData] = useState<any[]>([]);
-  const [yoeData, setYoeData] = useState<any[]>([]);
-  const [salaryData, setSalaryData] = useState<any[]>([]);
-
-  const testData = users.map(({ x, y }: any) => {
-    return { x, y };
-  });
-
+  //   mutate data to set the Y and X axis
   let allData = {
     graphAgeData: {
       datasets: [
         {
           label: "Age",
-          data: users.map(({ x, age }: any) => {
+          data: users?.map(({ x, age }: any) => {
             return { x, y: age };
           }),
           backgroundColor: "rgba(255, 99, 132, 1)",
@@ -31,7 +24,7 @@ const Chart = ({ users }: any) => {
       datasets: [
         {
           label: "Salary",
-          data: users.map(({ x, salary }: any) => {
+          data: users?.map(({ x, salary }: any) => {
             return { x, y: salary };
           }),
           backgroundColor: "blue",
@@ -43,7 +36,7 @@ const Chart = ({ users }: any) => {
       datasets: [
         {
           label: "Years Of Experience",
-          data: users.map(({ x, years_of_experience }: any) => {
+          data: users?.map(({ x, years_of_experience }: any) => {
             return { x, y: years_of_experience };
           }),
           backgroundColor: "purple",

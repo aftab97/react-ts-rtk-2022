@@ -6,6 +6,7 @@ import {
 } from "@mui/x-data-grid";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Chart from "./Components/Chart";
 import { AppDispatch, selectUsers } from "./Store/store";
 
 import { addUser, getUsers } from "./Store/Users/usersSlice";
@@ -60,6 +61,8 @@ export const App = () => {
           components={{ Toolbar: GridToolbar }}
         />
       )}
+
+      {users.loading === false && <Chart users={users} />}
     </div>
   );
 };

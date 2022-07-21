@@ -9,6 +9,7 @@ interface Users {
   salary: number;
   email: string;
   years_of_experience: number;
+  age: number;
 }
 
 interface UsersState {
@@ -39,6 +40,7 @@ const usersSlice = createSlice({
         industry: "n/a",
         salary: 98803.83,
         years_of_experience: 6.6,
+        age: 20,
       });
       state.loading = false;
     },

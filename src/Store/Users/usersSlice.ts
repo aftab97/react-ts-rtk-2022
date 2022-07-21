@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import moment from "moment";
 
 interface Users {
   id: number;
@@ -25,6 +26,7 @@ const initialState = {
 export const getUsers = createAsyncThunk("users/getUsers", async () => {
   return fetch("./MOCK_DATA.json").then((res) => res.json());
 });
+
 /* eslint-disable */
 const usersSlice = createSlice({
   name: "users",
@@ -48,8 +50,14 @@ const usersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getUsers.fulfilled, (state, action) => {
-      action.payload.map((val: any) => {
-        state.users.push(val);
+      action.payload.map((val: any, index: any) => {
+        let formattedAge = moment(val.date_of_birth, "DD-MM-YYYY").format();
+
+        return state.users.push({
+          ...val,
+          age: moment().diff(formattedAge, "years"),
+          x: index,
+        });
       }),
         (state.loading = false);
     });

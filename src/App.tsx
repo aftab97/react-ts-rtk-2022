@@ -50,19 +50,21 @@ export const App = () => {
   ];
 
   return (
-    <div style={{ height: "40vh", width: "100%" }}>
+    <div style={{ width: "100%", height: "50vh" }}>
       <button onClick={handleClick}>click</button>
-      {users.loading === false && (
-        <DataGrid
-          rows={users.users}
-          columns={columns}
-          experimentalFeatures={{ newEditingApi: true }}
-          onCellEditStop={handleEdit}
-          components={{ Toolbar: GridToolbar }}
-        />
-      )}
+      {users.users.length > 0 && (
+        <>
+          <DataGrid
+            rows={users.users}
+            columns={columns}
+            experimentalFeatures={{ newEditingApi: true }}
+            onCellEditStop={handleEdit}
+            components={{ Toolbar: GridToolbar }}
+          />
 
-      {users.loading === false && <Chart users={users} />}
+          <Chart users={users.users} />
+        </>
+      )}
     </div>
   );
 };

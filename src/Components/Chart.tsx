@@ -5,18 +5,36 @@ import { AgeGraph } from "./AgeGraph";
 import { YoeGraph } from "./YoeGraph";
 import { SalaryGraph } from "./SalaryGraph";
 
-const Chart = (props: any) => {
+const Chart = ({ users }: any) => {
   const [ageData, setAgeData] = useState<any[]>([]);
   const [yoeData, setYoeData] = useState<any[]>([]);
   const [salaryData, setSalaryData] = useState<any[]>([]);
+
+  const testData = users.map(({ x, y }: any) => {
+    return { x, y };
+  });
 
   let allData = {
     graphAgeData: {
       datasets: [
         {
           label: "Age",
-          data: ageData,
+          data: users.map(({ x, age }: any) => {
+            return { x, y: age };
+          }),
           backgroundColor: "rgba(255, 99, 132, 1)",
+        },
+      ],
+    },
+
+    graphSalaryData: {
+      datasets: [
+        {
+          label: "Salary",
+          data: users.map(({ x, salary }: any) => {
+            return { x, y: salary };
+          }),
+          backgroundColor: "blue",
         },
       ],
     },
@@ -25,17 +43,9 @@ const Chart = (props: any) => {
       datasets: [
         {
           label: "Years Of Experience",
-          data: yoeData,
-          backgroundColor: "blue",
-        },
-      ],
-    },
-
-    graphSalaryData: {
-      datasets: [
-        {
-          label: "Years Of Experience",
-          data: salaryData,
+          data: users.map(({ x, years_of_experience }: any) => {
+            return { x, y: years_of_experience };
+          }),
           backgroundColor: "purple",
         },
       ],
@@ -52,48 +62,22 @@ const Chart = (props: any) => {
     },
   };
 
-  useEffect(() => {
-    props.users.users.map((user: any, index: any) => {
-      let formattedAge = moment(user.date_of_birth, "DD-MM-YYYY").format();
-      ageData.push({
-        y: moment().diff(formattedAge, "years"),
-        x: index,
-      });
-
-      yoeData.push({
-        y: user.years_of_experience,
-        x: index,
-      });
-
-      salaryData.push({
-        y: user.salary,
-        x: index,
-      });
-    });
-  }, []);
-
   return (
     <div>
-      {ageData.length > 0 && (
-        <AgeGraph
-          graphData={allData.graphAgeData}
-          dataOptions={allOptions.ageDataOptions}
-        />
-      )}
+      <AgeGraph
+        graphData={allData.graphAgeData}
+        dataOptions={allOptions.ageDataOptions}
+      />
 
-      {yoeData.length > 0 && (
-        <YoeGraph
-          graphData={allData.graphYoeData}
-          dataOptions={allOptions.ageDataOptions}
-        />
-      )}
+      <YoeGraph
+        graphData={allData.graphYoeData}
+        dataOptions={allOptions.ageDataOptions}
+      />
 
-      {salaryData.length > 0 && (
-        <SalaryGraph
-          graphData={allData.graphSalaryData}
-          dataOptions={allOptions.ageDataOptions}
-        />
-      )}
+      <SalaryGraph
+        graphData={allData.graphSalaryData}
+        dataOptions={allOptions.ageDataOptions}
+      />
     </div>
   );
 };

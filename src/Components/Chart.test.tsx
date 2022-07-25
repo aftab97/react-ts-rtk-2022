@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Chart from "./Chart";
+import { Chart } from "./Chart";
 
 //when first created creates a file in the test dir creating a SS of the button component and will
 //check to see if any changes occur and if they do not match then it fails

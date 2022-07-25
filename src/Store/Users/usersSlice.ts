@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 import moment from "moment";
 
 interface Users {
@@ -14,6 +15,7 @@ interface Users {
 }
 
 interface UsersState {
+  [x: string]: any;
   users: Users[];
   loading: boolean;
 }
@@ -24,7 +26,8 @@ const initialState = {
 } as UsersState;
 
 export const getUsers = createAsyncThunk("users/getUsers", async () => {
-  return fetch("./MOCK_DATA.json").then((res) => res.json());
+  const res = await axios("http://localhost:3000/MOCK_DATA.json");
+  return await res.data;
 });
 
 /* eslint-disable */

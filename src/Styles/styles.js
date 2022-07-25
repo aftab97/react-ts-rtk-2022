@@ -1,2 +1,2 @@
-import "./Home.scss";
 import "./UsersTable.scss";
+import "./Nav.scss";

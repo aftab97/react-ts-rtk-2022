@@ -2,6 +2,8 @@ $background: #efefef;
 $lfs-blue: #006ac6;
 $lfs-yellow: #fab700;
 $lfs-grey: #75787b;
+$lfs-white: #f1f1f1;
+
 body {
   background-color: $background;
 }
@@ -24,21 +26,21 @@ body {
         text-align: center;
         padding: 10px;
         color: $lfs-blue;
-        border: 1px solid #f1f1f1;
+        border: $lfs-white;
       }
     }
   }
   tbody {
     tr {
-      border-bottom: 1px solid #f1f1f1;
+      border-bottom: $lfs-white;
       color: $lfs-grey;
       td {
         padding: 10px;
-        border: 1px solid #f1f1f1;
+        border: $lfs-white;
       }
       th {
         padding-left: 10px;
-        border: 1px solid #f1f1f1;
+        border: $lfs-white;
       }
     }
   }

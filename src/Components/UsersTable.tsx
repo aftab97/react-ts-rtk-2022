@@ -1,6 +1,7 @@
 import { DataGrid, GridColumns, GridToolbar } from "@mui/x-data-grid";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Outlet } from "react-router-dom";
 import { AppDispatch, selectUsers } from "../Store/store";
 import { getUsers } from "../Store/Users/usersSlice";
 
@@ -45,7 +46,11 @@ export const UsersTable = () => {
   const getHeader = () => {
     var keys = getKeys();
     return keys?.map((key, index) => {
-      return <th key={key}>{key.toUpperCase()}</th>;
+      return (
+        <th key={key} scope="col">
+          {key.toUpperCase()}
+        </th>
+      );
     });
   };
 
@@ -65,6 +70,7 @@ export const UsersTable = () => {
 
   return (
     <>
+      <Outlet />
       {usersFetched.users.length > 0 && (
         <div>
           <table className="table">

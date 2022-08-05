@@ -71,7 +71,7 @@ export const UsersTable = () => {
   return (
     <>
       <Outlet />
-      {usersFetched.users.length > 0 && (
+      {usersFetched.users?.length > 0 && (
         <div>
           <table className="table">
             <thead>
